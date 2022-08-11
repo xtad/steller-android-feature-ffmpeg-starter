@@ -11,9 +11,9 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val dexPath = File("$filesDir/dex", "inject.zip")
+        val dexPath = File("$filesDir/dex", "ffmpegkit.zip")
         if (!dexPath.exists()) {
-            DexUtils.prepareDex(applicationContext, dexPath, "inject.zip")
+            DexUtils.prepareDex(applicationContext, dexPath, "ffmpegkit.zip")
         }
 
         val dexs: MutableList<File> = ArrayList()

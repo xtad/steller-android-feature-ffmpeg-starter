@@ -17,7 +17,6 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-
     private val ffmpegController: FFmpegController by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,18 +33,16 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-
-
         try {
-            val `in`: String = "$filesDir/images/geo_simple_gold.png"
-            val out: String = "$filesDir/images/out.mp4"
+            val inputImage = "$filesDir/images/image_to_be_placed_into_video.png"
+            val outputFile = "$filesDir/images/out.mp4"
 
             ffmpegController.execute(
-                "-loop 1 -i " + `in` + " -f lavfi -t 00:00:05 -i anullsrc -c:v mpeg4 -t 00:00:05 " +
-                        "-b:v 500000 -tune stillimage -vf fps=1 -map 1:a -map 0:v " + out
+                "-loop 1 -i " + inputImage + " -f lavfi -t 00:00:05 -i anullsrc -c:v mpeg4 -t 00:00:05 " +
+                        "-b:v 500000 -tune stillimage -vf fps=1 -map 1:a -map 0:v " + outputFile
             )
         } catch (ex: Error) {
-            Toast.makeText(this, "aou", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error happened, probably FFmpeg was not found!", Toast.LENGTH_LONG).show()
         }
     }
 }
